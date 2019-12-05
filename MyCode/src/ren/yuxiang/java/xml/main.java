@@ -24,13 +24,12 @@ public class main {
 		}
 	}
 
-	
-
 	private static String pathString = "/Users/yuxiang/Files/LearnJAVA/Practise Code/MyCode/data.xml";
 	/**
 	 * 获取内容 并更新
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unused")
 	private static void getXML() throws Exception {
 		
 		File file = new File(pathString);
@@ -48,7 +47,7 @@ public class main {
 		// 重新设置mail内容
 		mailElement.setTextContent("me@yuxaing.ren");
 		
-		// 将修改后的内容写到xml文件
+		// 将修改后的内容写到XML文件
 		Source source = new DOMSource(document);
 		StreamResult result = new StreamResult(file);
 		TransformerFactory.newInstance().newTransformer().transform(source, result);
@@ -63,6 +62,7 @@ public class main {
 	 * 新增
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unused")
 	private static void createLinkman() throws Exception {
 		File file = new File(pathString);
 		
@@ -97,7 +97,7 @@ public class main {
 		
 		rootElement.appendChild(linmanElement);
 		
-		// 将修改后的内容写到xml文件
+		// 将修改后的内容写到XML文件
 		Source source = new DOMSource(document);
 		StreamResult result = new StreamResult(file);
 		TransformerFactory.newInstance().newTransformer().transform(source, result);
@@ -126,7 +126,7 @@ public class main {
 			}
 		}
 		
-		// 将修改后的内容写到xml文件
+		// 将修改后的内容写到XML文件
 		Source source = new DOMSource(document);
 		StreamResult result = new StreamResult(file);
 		TransformerFactory.newInstance().newTransformer().transform(source, result);
