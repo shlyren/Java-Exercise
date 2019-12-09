@@ -1,0 +1,15 @@
+package ren.yuxiang.part02.E03_annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface VIP {
+
+	String name();
+	int age() default 0;
+	String[] partner() default {};
+}
