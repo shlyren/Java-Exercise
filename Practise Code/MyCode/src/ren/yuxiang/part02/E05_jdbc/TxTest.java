@@ -57,7 +57,7 @@ public class TxTest extends BaseDao {
 			e.printStackTrace();
 			// 回滚
 			connection.rollback();
-		}finally {
+		} finally {
 			close(connection, statement, resultSet);
 		}
 		

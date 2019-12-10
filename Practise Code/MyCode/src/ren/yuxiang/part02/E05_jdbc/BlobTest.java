@@ -38,7 +38,6 @@ public class BlobTest extends BaseDao {
 		preparedStatement.execute();
 		
 		close(connection, preparedStatement);
-		
 	}
 	
 	@Test
@@ -50,7 +49,7 @@ public class BlobTest extends BaseDao {
 		ResultSet resultSet = preparedStatement.executeQuery();
 		if (resultSet.next()) {
 			Blob blob = resultSet.getBlob("image");
-			// 获取舒服流
+			// 获取输入流
 			InputStream inputStream = blob.getBinaryStream();
 			// 文件拷贝
 			Files.copy(inputStream, Paths.get("/Users/yuxiang/Desktop/timg-1.png"));
