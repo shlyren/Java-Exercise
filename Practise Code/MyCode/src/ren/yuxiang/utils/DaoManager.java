@@ -1,4 +1,4 @@
-package ren.yuxiang.part02.E05_jdbc.util;
+package ren.yuxiang.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -133,10 +133,10 @@ public class DaoManager<T> {
 		return list;
 	}
 	
-	private void close(Connection connection, Statement statement) {
+	public void close(Connection connection, Statement statement) {
 		close(connection, statement, null);
 	}
-	private void close(Connection connection, Statement statement, ResultSet resultSet) {
+	public void close(Connection connection, Statement statement, ResultSet resultSet) {
 		if (resultSet != null) {
 			try {
 				resultSet.close();

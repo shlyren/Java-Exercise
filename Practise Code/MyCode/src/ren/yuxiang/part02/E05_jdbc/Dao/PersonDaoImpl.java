@@ -3,7 +3,7 @@ package ren.yuxiang.part02.E05_jdbc.Dao;
 import java.sql.ResultSet;
 import java.util.List;
 
-import ren.yuxiang.part02.E05_jdbc.util.DaoManager;
+import ren.yuxiang.utils.DaoManager;
 
 public class PersonDaoImpl implements iDabaBaseDao<Person> {
 
