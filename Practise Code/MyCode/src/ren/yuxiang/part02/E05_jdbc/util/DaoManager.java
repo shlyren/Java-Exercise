@@ -1,4 +1,4 @@
-package ren.yuxiang.part02.E05_jdbc.Dao;
+package ren.yuxiang.part02.E05_jdbc.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class BaseDao {
+
+public class DaoManager<T> {
 	
-	interface Converable<T> {
+	public interface Converable<T> {
 		/**
 		 * 将结果集转换为真实的实例对象
 		 * @param resultSet 结果集
@@ -24,7 +25,7 @@ public class BaseDao {
 		public T convert(ResultSet resultSet) throws Exception;
 	}
 	
-	public Converable<?> converable;
+	private Converable<T> converable;
 	
 	public static final Properties properties = new Properties();
 	
@@ -45,20 +46,22 @@ public class BaseDao {
 		}
 	}
 	
+	public void setConverable(Converable<T> converable) {
+		this.converable = converable;
+	}
+	
 	/**
 	 * 获取JDBC连接对象，每次获取都会重新创建
 	 * @return
 	 * @throws Exception
 	 */
-	public static Connection getConnectionInstance() throws Exception {
+	public Connection getConnectionInstance() throws Exception {
 		return DriverManager.getConnection(
 				properties.getProperty(URL), 
 				properties.getProperty(USER_NAME), 
 				properties.getProperty(PASSWORD)
 			);
 	}
-	
-	
 	
 	/**
 	 * DML（增删改）
@@ -93,14 +96,15 @@ public class BaseDao {
 	/**
 	 * DQL（查）
 	 * @param <T>
-	 * @param <T>
 	 * @param sql
 	 * @param args SQL参数列表
 	 * @return 结果
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
-	public <T> List<T> executeQuery(String sql, Object... args){
+	public List<T> executeQuery(String sql, Object... args) {
+		if (converable == null) {
+			throw new RuntimeException("You must implements Converable.convert method.");
+		}
 		System.out.println(sql);
 		ArrayList<T> list = new ArrayList<>();
 		Connection connection = null;
@@ -117,7 +121,8 @@ public class BaseDao {
 			resultSet = statement.executeQuery();
 			
 			while (resultSet.next()) {
-				list.add( (T)this.converable.convert(resultSet));
+				T object = converable.convert(resultSet);
+				list.add(object);
 			}
 
 		} catch (Exception e) {
@@ -127,11 +132,11 @@ public class BaseDao {
 		}
 		return list;
 	}
-
-	public static void close(Connection connection, Statement statement) {
+	
+	private void close(Connection connection, Statement statement) {
 		close(connection, statement, null);
 	}
-	public static void close(Connection connection, Statement statement, ResultSet resultSet) {
+	private void close(Connection connection, Statement statement, ResultSet resultSet) {
 		if (resultSet != null) {
 			try {
 				resultSet.close();

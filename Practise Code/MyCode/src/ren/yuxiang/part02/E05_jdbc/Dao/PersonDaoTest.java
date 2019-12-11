@@ -1,12 +1,12 @@
 package ren.yuxiang.part02.E05_jdbc.Dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 class PersonDaoTest {
 
-	private iPersonDao personDao = new PersonDaoImpl();
+	private iDabaBaseDao<Person> personDao = new PersonDaoImpl();
 	
 	@Test
 	void testSave() {
@@ -37,7 +37,7 @@ class PersonDaoTest {
 
 	@Test
 	void testGetAll() {
-		ArrayList<Person> list = personDao.getAll();
+		List<Person> list = personDao.getAll();
 		
 		for (Person person : list) {
 			System.out.println(person);
