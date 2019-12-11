@@ -29,9 +29,33 @@ public class DruidTest {
 		});
 		
 		System.out.println(pool.executeQuery("SELECT * FROM t_person"));
+
+		pool.closeDataSouce();
 		System.out.println(pool.executeQuery("SELECT * FROM t_person WHERE id = 25"));
-//		pool.closeDataSouce();
 		
+		
+	}
+	@Test
+	public void testName1() throws Exception {
+	
+		DruidManager<Person> pool = new DruidManager<>();
+		pool.setConverable(new DruidManager.Converable<Person>() {
+			
+			@Override
+			public Person convert(ResultSet resultSet) throws Exception {
+				Person person = new Person();
+				person.setId(resultSet.getString("id"));
+				person.setName(resultSet.getString("name"));
+				person.setAge(resultSet.getInt("age"));
+				return person;
+			}
+		});
+		
+		System.out.println(pool.executeQuery("SELECT * FROM t_person"));
+		System.out.println(pool.executeQuery("SELECT * FROM t_person WHERE id = 25"));
+		pool.closeDataSouce();
+		
+		new DruidManager<>();
 		
 	}
 }

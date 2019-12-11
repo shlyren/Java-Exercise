@@ -14,6 +14,12 @@ import java.util.Properties;
 
 
 public class DaoManager<T> {
+
+	
+	public static final String DRIVER_CLASS_NAME = "driverClassName";
+	public static final String URL = "url";
+	public static final String USER_NAME = "username";
+	public static final String PASSWORD = "password";
 	
 	public interface Converable<T> {
 		/**
@@ -28,11 +34,6 @@ public class DaoManager<T> {
 	private Converable<T> converable;
 	
 	public static final Properties properties = new Properties();
-	
-	public static final String DRIVER_CLASS_NAME = "driverClassName";
-	public static final String URL = "url";
-	public static final String USER_NAME = "username";
-	public static final String PASSWORD = "password";
 	
 	static {
 		try {
@@ -133,33 +134,28 @@ public class DaoManager<T> {
 		return list;
 	}
 	
+	/**
+	 * 关闭
+	 * @param connection
+	 * @param statement
+	 */
 	public void close(Connection connection, Statement statement) {
 		close(connection, statement, null);
 	}
 	public void close(Connection connection, Statement statement, ResultSet resultSet) {
-		if (resultSet != null) {
-			try {
+		try {
+			if (resultSet != null && !resultSet.isClosed()) {
 				resultSet.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
-		if (statement != null) {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (statement != null && !statement.isClosed()) {
+				statement.close();	
 			}
-		}
-		if (connection != null) {
-			try {
+			if (connection != null && !connection.isClosed()) {
 				connection.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
