@@ -14,7 +14,6 @@ import java.util.Properties;
 
 
 public class DaoManager<T> {
-
 	
 	public static final String DRIVER_CLASS_NAME = "driverClassName";
 	public static final String URL = "url";

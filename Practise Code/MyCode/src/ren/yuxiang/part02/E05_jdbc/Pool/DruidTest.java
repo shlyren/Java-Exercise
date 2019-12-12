@@ -2,6 +2,7 @@ package ren.yuxiang.part02.E05_jdbc.Pool;
 
 
 import java.sql.ResultSet;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -28,13 +29,18 @@ public class DruidTest {
 			}
 		});
 		
-		System.out.println(pool.executeQuery("SELECT * FROM t_person"));
+//		System.out.println(pool.executeQuery("SELECT * FROM t_person"));
+//
+//		pool.closeDataSouce();
+	
+		List<Person> resultList = pool.executeQuery("SELECT * FROM t_person WHERE id > 20");
+		for (Person object : resultList) {
 
-		pool.closeDataSouce();
-		System.out.println(pool.executeQuery("SELECT * FROM t_person WHERE id = 25"));
-		
+			System.out.println(object);
+		}
 		
 	}
+	
 	@Test
 	public void testName1() throws Exception {
 	

@@ -23,7 +23,6 @@ public class DruidManager<T> extends DaoManager<T> {
 		return dataSource.getConnection();
 	}
 	
-	
 	/**
 	 * 打开连接池
 	 */
