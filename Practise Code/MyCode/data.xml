@@ -1,17 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><contancts>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<contancts>
 	<linkman id="0">
-		<name>me@yuxaing.ren</name>
+		<name>me</name>
 		<nick>玉祥</nick>
 		<age>18</age>
 		<height>1.75</height>
-		<mail>me@yuxaing.ren</mail>
+		<mail>me</mail>
 	</linkman>
 	<linkman id="1">
 		<name>任玉祥</name>
-		<nick>yuxiang</nick>
+		<nick>222</nick>
 		<age>19</age>
 		<height>1.88</height>
-		<mail>mail@yuxiang.ren</mail>
+		<mail>mail</mail>
 	</linkman>
 	
 </contancts>

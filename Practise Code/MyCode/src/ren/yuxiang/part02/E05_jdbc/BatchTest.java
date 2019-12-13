@@ -2,7 +2,6 @@ package ren.yuxiang.part02.E05_jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import org.junit.jupiter.api.Test;
 
