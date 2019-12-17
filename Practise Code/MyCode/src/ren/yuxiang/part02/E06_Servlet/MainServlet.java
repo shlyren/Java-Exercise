@@ -1,43 +1,50 @@
 package ren.yuxiang.part02.E06_Servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class MainServlet implements Servlet {
+@WebServlet("/main")
+public class MainServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Override
-	public ServletConfig getServletConfig() {
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+		super.service(arg0, arg1);
+		System.out.println(arg0.getRequestURL());
+		System.out.println(arg0.getHeader("User-Agent"));
+		HttpSession session = arg0.getSession();
+		System.out.println(session.getId());
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.addHeader("Content-Type", "text/html;charset=utf-8");
+		System.out.println(req.getParameter("account"));
+		System.out.println(req.getParameter("password"));
 		
-		return null;
-	}
-
-	@Override
-	public String getServletInfo() {
+		PrintWriter writer = resp.getWriter();
 		
-		return null;
+		writer.write("Hello world");
+		writer.write("123");
 	}
-
+	
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-	}
-
-	@Override
-	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println("service");
-		System.out.println(request.getServerName());
-
-	}
-
-	@Override
-	public void destroy() {
+		File file = new File("/Users/yuxiang/Desktop/db_baixiaotu.sql");
+		Files.copy(file.toPath(), resp.getOutputStream());
 		
 	}
-
 
 }

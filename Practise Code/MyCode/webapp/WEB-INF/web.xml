@@ -4,17 +4,22 @@
   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
   version="4.0"
-  metadata-complete="true">
-	
-	<servlet>
+  metadata-complete="false">
+  <!--
+   	metadata-complete： 是否忽略扫描注解
+   -->
+	<!-- <servlet>
 		<servlet-name>MainServlet</servlet-name>
 		<servlet-class>ren.yuxiang.part02.E06_Servlet.MainServlet</servlet-class>
+		
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
 	</servlet>
-	
-	
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
-		<url-pattern>/main</url-pattern>
-	</servlet-mapping>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping> -->
 	
 </web-app>
